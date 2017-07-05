@@ -1,8 +1,8 @@
 ﻿/*
  * Ultrasonic.c
  *
- * Created: 13/09/2016 07:30:42 PM
- *  Author: safifi
+ * Created: 13/09/2016 07:30:42 م
+ *  Author: sameh
  */ 
 
 #include "Ultrasonic.h"
@@ -19,21 +19,26 @@ void Ultrasonic_init(){
 uint32_t Ultrasonic_Read(){
 	
 		volatile uint32_t Duration=0;
+			Trigger_OFF;
+			_delay_us(10);
+			Trigger_ON;
+			_delay_us(10);
+			Trigger_OFF;
 		if (!(PINC & (1<<PC1)))
 		{
 			while(!(PINC & (1<<PC1)));  // wait until echo goes high
 			Timer0_Start();
-			while(PINC &(1<<PC1));
+			while(PINC &(1<<PC1) && count != 3);
 			Timer0_Stop();
 		}
 		else{
 			while((PINC & (1<<PC1)));  // wait until echo goes high
 			Timer0_Start();
-			while(!(PINC &(1<<PC1)));
+			while(!(PINC &(1<<PC1)) && count != 3);
 			Timer0_Stop();			
 		}
 		/*stopWatch value reading*/
-		Duration = F_CPU / Timer0_read() / 2;
+		Duration =Timer0_read() * 34000 / F_CPU / 2;
 		return Duration;
 }	
 

@@ -1,14 +1,13 @@
 ﻿/*
  * Ultrasonic.h
  *
- * Created: 13/09/2016 07:31:05 PM
- *  Author: safifi
+ * Created: 13/09/2016 07:31:05 م
+ *  Author: sameh
  */ 
 
 
 #ifndef ULTRASONIC_H_
 #define ULTRASONIC_H_
-
 #include "std_macros.h"
 /*
 init timer 0
